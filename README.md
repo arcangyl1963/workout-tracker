@@ -1,61 +1,166 @@
-# Unit 18 Nosql Homework: Workout Tracker
+# Fitness Tracker App
 
-For this assignment, you'll create a workout tracker. You have already been provided with the front end code in the `Develop` folder. This assignment will require you to create Mongo database with a Mongoose schema and handle routes with Express.
+![License](https://img.shields.io/badge/License-MIT-green.svg)<br>
 
-## User Story
+## Description:<br>
 
-* As a user, I want to be able to view create and track daily workouts. I want to be able to log multiple exercises in a workout on a given day. I should also be able to track the name, type, weight, sets, reps, and duration of exercise. If the exercise is a cardio exercise, I should be able to track my distance traveled.
+The Fitness Tracker is a web application that allows a user to input their personal workout information for both resistance training and cardio workouts. The app allows the user to enter multiple excersises for one workout session. It tracks the time duration of the workout, the weight totals lifted for resistance training, and the distance traveled for the cardio workouts where applicable. All of this statistical information can be viewed in a graphical chart format on the user dashboard.<br>
 
-## Business Context
 
-A consumer will reach their fitness goals more quickly when they track their workout progress.
+The Fitness Tracker utilizes the following technologies:
+  * JavaScript
+  * NODE.JS
+  * MongoDB
+  * NPM packages:
+    * ExpressJS
+    * Mongoose
+    * Morgan
 
-## Acceptance Criteria
 
-When the user loads the page, they should be given the option to create a new workout or continue with their last workout.
+---
 
-The user should be able to:
 
-  * Add exercises to the most recent workout plan.
+## Table of Contents<br>
 
-  * Add new exercises to a new workout plan.
+[Installation](#installation)<br>
 
-  * View the combined weight of multiple exercises from the past seven workouts on the `stats` page.
+[Usage](#usage)<br>
 
-  * View the total duration of each workout from the past seven workouts on the `stats` page.
+[Heroku](#heroku)<br>
 
-> **Important:** Look into using a MongoDB aggregate function to dynamically add up and return the total duration for each workout. Check out the [MongoDB documentation on the $addFields](https://docs.mongodb.com/manual/reference/operator/aggregation/addFields/), the [MongoDB documentation on the $sum operator](https://docs.mongodb.com/manual/reference/operator/aggregation/sum/), and the [Mongoose documentation on aggregate functions](https://mongoosejs.com/docs/api.html#aggregate_Aggregate) to learn how it can be accomplished.
+[License](#license)<br>
 
-To deploy an application with a MongoDB database to Heroku, you'll need to set up a MongoDB Atlas account and connect a database from there to your application. Be sure to use the following guides for support:
+[Contributors](#contributors)<br>
 
-  * [Set Up MongoDB Atlas](../04-Important/MongoAtlas-Setup.md)
+[Tests](#tests)<br>
 
-  * [Deploy with Heroku and MongoDB Atlas](../04-Important/MongoAtlas-Deploy.md)
+[Questions](#Questions)<br>
 
-## Commit Early and Often
+---
 
-One of the most important skills to master as a web developer is version control. Building the habit of committing via Git is important for the following two reasons:
+## Installation:<br>
 
-1. Your commit history is a signal to employers that you are actively working on projects and learning new skills.
+My files can be accessed in the repository [HERE](https://github.com/arcangyl1963/workout-tracker)<br>
 
-2. Your commit history allows you to revert your codebase in the event that you need to return to a previous state.
+The image below shows the repository where my project files are located:
 
-Follow these guidelines for committing:
+![Third Triad Mojo Tech Blog Repo](./images/TTMBlog_repo.png)<br>
 
-* Make single-purpose commits for related changes to ensure a clean, manageable history. If you are fixing two issues, make two commits.
 
-* Write descriptive, meaningful commit messages so that you and anyone else looking at your repository can easily understand its history.
+Begin setting up your local repository by cloning the repo from the link above or by downloading the files to your local drive.<br>
 
-* Don't commit half-done work, for the sake of your collaborators (and your future self!).
+The repository will contain all of the files needed to run the application and follows the MVC paradigm for directory structure:<br>
 
-* Test your application before you commit to ensure functionality at every step in the development process.
+* A 'config' directory containing the database connection script.
+* A 'controllers' containing the route scripts for API calls and for the views.
+* A 'db' directory containing the schema for creating the database.
+* A 'public' directory that houses the javascripts and the CSS stylesheet.
+* A 'models' directory containing the model classes for the Users, Posts, and Comments.
+* A 'utils' directory that the authentication script for the user login feature and a helpers script used to manage the date formats.
+* An 'images' directory containing the image files for the README document.
+* A package.json file that contains the package dependencies required for the application to run and the application script information.
+* A server.js script file that is invoked in NodeJS to run the server backend which serves the blog site.
 
-We want you to have well over 200 commits by graduation, so commit early and often!
+Next proceed by creating the database using the MySQl CLI (or you may use a GUI software application such as MySQL Workbench or Sequel Pro):
 
-## Submission on BCS
+  In Terminal or a similar BASH utility, enter:
+  ~~~
+  mysql -u root -p
+  ~~~
+  When prompted for password enter the password for the root MySQL user you set during installation of MySQL.
+  You should then see the mysql prompt indicating you are now in the MySQL CLI:
+  ~~~
+  mysql>
+  ~~~
+  Copy the SQL commands from the schema.sql file in sql directory and paste them in the CLI:
+  ~~~
+For example, to remove the database if it exists and create a new database you would paste this:
 
-You are required to submit the following:
+mysql> DROP DATABASE IF EXISTS tech_blog_db;
+CREATE DATABASE tech_blog__db;
+~~~
+<br>
 
-* The URL to the deployed application
+Once the database has been created, you will install any package dependencies required to run the server application and to setup the development environment on your local repository.<br>
 
-* The URL to the GitHub repository
+In Terminal or a similar bash command-line utility, navigate to the working directory and enter:<br>
+
+~~~
+npm install OR npm i
+~~~
+
+This will install any package dependencies defined in the package.json file.<br>
+
+If you do not have MySQL installed on your system, you will need to install it as well. Download the appropriate installer for your operating system from [here](https://dev.mysql.com/downloads/installer/) and follow the instructions provided by the installer.<br>
+
+Additionally, you will need to create a .env file with your MySQL user and password information. Use the dotenvEXAMPLE file as a guide.<br> 
+
+---
+
+## Usage:<br>
+To run the application locally type the following into Terminal or the command-line utility of your choice:<br>
+
+~~~
+node server.js
+~~~
+
+The server application will launch and you will see 'App listening on port 3001!' as well as the Sequelize queries inserting the tables into the database.
+Enter https://localhost:3001/ into the address field of your web browser.<br>
+
+You will be presented with the home screen.
+
+![Third Triad Mojo Tech Blog Home screen](./images/TTMBlog_home.png)<br>
+
+If this is the first time launching the app, you will need to register as a user by clicking 'New User Registration' in the navbar or on the 'Register here' link of the Login panel.
+
+![Third Triad Mojo Tech Blog New User Registration](./images/TTMBlog_register.png)<br>
+
+Once logged in the user's dashboard will display.
+
+![Third Triad Mojo Tech Blog User Dashboard](./images/TTMBlog_dashboard.png)<br>
+
+If the user has posted entries prior to the session, those will display in the dashboard list.
+
+![Third Triad Mojo Tech Blog Dashboard with Entries](./images/TTMBlog_dashboard_postlist.png)<br>
+
+Click the New Post button to enter a new post.
+
+![Third Triad Mojo Tech Blog New Post Entry](./images/TTMBlog_dashboard_newpost.png)<br>
+
+Click on a posts name to bring up the Post Editor.
+
+![Third Triad Mojo Tech Blog Edit Post](./images/TTMBlog_dashboard_editpost.png)<br>
+
+## Heroku:
+
+The Third Triad Mojo Tech Blog site can be accessed from this Heroku Deployment link:
+[Heroku app](https://third-triad-mojo-tech-blog.herokuapp.com/)
+
+---
+
+## License:<br>
+
+![License](https://img.shields.io/badge/License-MIT-green.svg)<br>This software is licensed under an MIT license:<br><br>Copyright © 2021 Arcangyl Studios<br><br>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:<br>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.<br>THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.<br>
+
+---
+
+## Contributors:<br>
+
+James Harris<br>
+
+---
+
+## Tests:<br>
+
+There were no test scripts created for this application.<br>
+
+---
+
+## Questions:<br>
+
+
+- Feel free to email me with any questions about this project at: arcangyl@gmail.com<br>
+
+![GitHubAvatar](https://avatars.githubusercontent.com/u/77169680?v=4)<br>
+
+- My GitHub profile may be viewed by clicking [here](https://github.com/arcangyl1963).
