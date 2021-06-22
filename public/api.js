@@ -1,5 +1,3 @@
-// const Workout = require('../models/workout');
-
 const API = {
   async getLastWorkout() {
     let res;
@@ -42,16 +40,4 @@ const API = {
     const json = await res.json();
     return json;
   },
-  // async setSumOfAllWeight() {
-  //   const res = await fetch(`/api/workouts/range`);
-  //   const data = await res.json();
-  //   const workoutsLast7Days = data
-  //     .find({
-  //       day: {
-  //         $gte: new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000),
-  //       },
-  //     })
-  //     .sort({ day: -1 });
-  //   return workoutsLast7Days;
-  // },
 };
