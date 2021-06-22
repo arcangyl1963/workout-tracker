@@ -8,10 +8,9 @@ function calculateTotalWeight(data) {
       }
       return total;
     }, 0);
-
     totals.push(workoutTotal);
-  });
 
+  });
   return totals;
 }
 
@@ -92,7 +91,7 @@ function populateChart(data) {
     options: {
       title: {
         display: true,
-        text: 'Pounds Lifted (Last 7 days)',
+        text: `Pounds Lifted (Last 7 days)`,
       },
       scales: {
         yAxes: [
@@ -109,3 +108,4 @@ function populateChart(data) {
 
 // get all workout data from back-end
 API.getWorkoutsInRange().then(populateChart);
+// API.setSumOfAllWeight();
